@@ -15,10 +15,6 @@ public:
         cout << "Enter Name:";
         cin >> name;
         cin.ignore();
-        if (name == "done")
-        {
-            return;
-        }
         cout << "Enter Book Id: ";
         cin >> id;
         cout << "Enter Price: ";
