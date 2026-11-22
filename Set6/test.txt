@@ -1,0 +1,289 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int a, b;
+    cout << "Enter Two Numbers: ";
+    cin >> a >> b;
+    try
+    {   float(a / b);
+        if (b == 0)
+        {
+            throw ("Error: Divison by Zero is not Allowed");
+        }
+    }
+    catch (const char* msg)
+    {
+        cout << msg << '\n';
+    }
+   
+
+    return 0;
+}
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+class NegativeNumber : public exception {
+public:
+    const char* what() const noexcept override {
+        return "Negative Number Exception";
+    }
+};
+
+int main() {
+    int n;
+    cout << "Enter Number: ";
+    cin >> n;
+
+    try {
+        if (n < 0) {
+            throw NegativeNumber();
+        }
+        double s = sqrt(n);
+        cout << "Square root: " << s << endl;
+    }
+    catch ( NegativeNumber& e) {
+        cout << e.what() << endl;
+    }
+
+    return 0;
+}
+#include <iostream>
+using namespace std;
+class Invalid : public exception
+{
+public:
+    const char *what() const noexcept override
+    {
+        return "Insufficent Balance";
+    }
+};
+class bankaccount
+{
+protected:
+    double balance{3000};
+
+public:
+    void withdraw()
+    {
+        int a1;
+        cout << "Withdraw:";
+        cin >> a1;
+        try
+        {
+            if (a1 > balance)
+            {
+                throw Invalid();
+            }
+            balance -= a1;
+            cout << "Withdrwal Successful \n";
+        }
+        catch (Invalid &e)
+        {
+            cout << e.what() << '\n';
+        }
+    }
+};
+int main()
+{
+    bankaccount b1;
+    b1.withdraw();
+    return 0;
+}#include<iostream>
+using namespace std;
+int main(){
+    int marks;
+    cout<<"Enter Marks \n";
+    cin>>marks;
+    try
+    {
+        if (marks<0 || marks>100)
+        {
+            throw "Invalid Marks! Marks Should be between 0 and 100 ";
+        }
+    }
+    catch(const char *msg)
+    {
+        cout << msg << '\n';
+    }
+    return 0;
+    
+}
+#include<iostream>
+using namespace std;
+int main(){
+    int arr[10];
+    cout<<"Enter Elements: \n";
+    for (int i = 0; i < 10; i++)
+    {
+        cin>>arr[i];
+    }
+    int n;
+    cout<<"Enter Index: ";
+    cin>>n;
+    try
+    {
+        if (n<0 || n>9)
+        {
+            throw"Error: Array Index out of range";
+        }
+        
+    }
+    catch(const char* msg)
+    {
+        cout<< msg << '\n';
+    }
+    return 0;
+}
+#include<iostream>
+using namespace std;
+class Invalid:public exception{
+    public:
+    const char* what() const noexcept override{
+        return "Not eligible for voting";
+    }
+};
+int main(){
+    int age;
+    cout<<"Enter Age: ";
+    cin>>age;
+    try
+    {
+        if (age<18)
+        {
+            throw Invalid();
+        }
+        
+    }
+    catch(Invalid &e)
+    {
+        cout << e.what() << '\n';
+    }
+    
+    return 0;
+}
+#include <iostream>
+using namespace std;
+int main()
+{
+    int x, y;
+    char ch;
+    cout << "Enter Numbers: ";
+    cin >> x >> ch >> y;
+    try
+    {
+        if (ch != '+' && ch != '-' && ch != '/' && ch != '*')
+        {
+            throw ch;
+        }
+        if (ch == '/' && y == 0)
+        {
+            throw 0;
+        }
+        if (ch == '+')
+        {
+            cout << x + y << endl;
+        }
+        else if (ch == '-')
+        {
+            cout << x - y << endl;
+        }
+        else if (ch == '/')
+        {
+            cout << x / y << endl;
+        }
+        else
+        {
+            cout << x * y << endl;
+        }
+    }
+    catch (const char)
+    {
+        cout << "Invalid Operator" << '\n';
+    }
+    catch (const int)
+    {
+        cout << "Division by zero error" << endl;
+    }
+    return 0;
+}#include<iostream>
+#include<string>
+#include <fstream>
+using namespace std;
+int main(){
+    string name;
+    int roll;
+    int marks;
+    ofstream outfile("Students.txt");
+    for (int i = 0; i < 2; i++)
+    {
+        cout<<"Enter Name: ";
+        getline(cin,name);
+        cout<<"Enter roll number and Marks: ";
+        cin>>roll>>marks;
+        cin.ignore();
+        outfile<<name<<" "<<roll<<" "<<marks<<"\n";
+        
+    }
+    return 0;
+}
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+int main()
+{
+    ifstream file("students.txt");
+    if (!file)
+    {
+        cout << "file Could not be opened \n";
+    }
+    string line;
+    string word;
+
+    int characters{0};
+    int words{0};
+    int lines{0};
+    // lines/char
+    while (getline(file, line))
+    {
+        lines++;
+        characters += line.length();
+    }
+    file.clear();
+    file.seekg(0);
+    while (file >> word)
+    {
+        words++;
+    }
+    file.close();
+    cout << "Characters = " << characters << endl;
+    cout << "Words = " << words << endl;
+    cout << "Lines = " << lines << endl;
+
+    return 0;
+}
+#include<iostream>
+#include<fstream>
+using namespace std;
+int main(){
+    ifstream source("source.txt");
+    ofstream destination("destination.txt");
+    if (!source)
+    {
+        cout<<"File Could not be opened \n";
+    }
+    char ch;
+    while (source.get(ch))
+    {
+        destination.put(ch);
+    }
+    source.close();
+    destination.close();
+    cout<<"Copied Successfully \n";
+    return 0;
+    
+}
